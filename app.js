@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var compression = require('compression');
 var app = express();
 
 // view engine setup
@@ -24,6 +24,8 @@ app.use(function(req, res, next) {
   console.log('[TRACE] Server 404 request:' + req.originalUrl);
   res.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+app.use(compression());
 
 // error handler
 app.use(function(err, req, res, next) {

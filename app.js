@@ -1,11 +1,14 @@
+var compression = require('compression');
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var compression = require('compression');
 var app = express();
+
+//gzip
+app.use(compression());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +28,6 @@ app.use(function(req, res, next) {
   res.status(200).sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use(compression());
 
 // error handler
 app.use(function(err, req, res, next) {
